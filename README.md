@@ -28,4 +28,4 @@ From your command line run yarn run db:seed
 # command line for running this project
 - yarn install
 - yarn run dev
-
+- yarn run dev:client
