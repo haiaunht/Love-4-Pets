@@ -27,5 +27,11 @@ From your command line run yarn run db:seed
 
 # command line for running this project
 - yarn install
-- yarn run dev
-- yarn run dev:client
+- yarn run dev (from 1 tab)
+- yarn run dev:client (other tab)
+
+# start for db
+- createdb pokedex
+- yarn run db:import => import schema
+- can do psql pokedex => to check the schema create 
+- get back out and run => yarn run db:seed => populate datas
