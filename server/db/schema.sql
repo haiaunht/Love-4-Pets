@@ -38,4 +38,3 @@ CREATE TABLE pet_surrender_applications (
   vaccination_status BOOLEAN,
   application_status VARCHAR(255) NOT NULL
 );
-q

@@ -19,7 +19,7 @@ const SurrenderForm = props => {
 
   const addNewSurrenderedPet = async () => {
     try {
-      const response = await fetch("/api/v1/adoptions/new", {
+      const response = await fetch("/api/v1/surrenders/new", {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json"

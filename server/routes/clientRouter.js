@@ -9,9 +9,10 @@ const clientRoutes = [
   "/pets/puppies/:id",
   "/pets/pokemon",
   "/pets/pokemon/:id",
-  "/adoptions/new",
+  "/surrenders/new",
   "/about",
   "/admin",
+  "/surrenders",
   "/404"
 ]
 clientRouter.get(clientRoutes, (req, res) => {

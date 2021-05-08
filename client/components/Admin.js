@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from "react"
 import AdminForm from "./AdminForm"
+import AdminSurrenderForm from "./AdminSurrenderForm"
 
 const Admin = props => {
-  const [adoptForms, setadoptForms] = useState([])
+  const [adoptForms, setAdoptForms] = useState([])
+  const [surrenderForms, setSurrenderForms] = useState([])
+
   const fetchAllForm = async () => {
     try {
       const response = await fetch("/api/v1/admin")
@@ -12,7 +15,22 @@ const Admin = props => {
         throw error
       }
       const body = await response.json()
-      setadoptForms(body.adoptionApplications)
+      setAdoptForms(body.adoptionApplications)
+    } catch (err) {
+      console.log(`Error in fetch: ${err.message}`)
+    }
+  }
+
+  const fetchAllSurrender = async () => {
+    try {
+      const response = await fetch("/api/v1/surrenders")
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      const body = await response.json()
+      setSurrenderForms(body.surrenderedPets)
     } catch (err) {
       console.log(`Error in fetch: ${err.message}`)
     }
@@ -20,17 +38,33 @@ const Admin = props => {
 
   useEffect(() => {
     fetchAllForm()
+    fetchAllSurrender()
   }, [])
 
   const allAdoptForms = adoptForms.map( form => {
     return (
-      <AdminForm 
-        key={form.id} 
-        name={form.name} 
+      <AdminForm
+        key={form.id}
+        ownerName={form.name}
         phoneNumber={form.phoneNumber}
         email={form.email}
         homeStatus={form.homeStatus}
         applicationStatus={form.applicationStatus}
+        petId={form.petId}
+      />
+    )
+  })
+
+  const allSurrenderForms = surrenderForms.map( form => {
+    return (
+      <AdminSurrenderForm
+        key={form.id}
+        ownerName={form.name}
+        phoneNumber={form.phoneNumber}
+        email={form.email}
+        homeStatus={form.homeStatus}
+        applicationStatus={form.applicationStatus}
+        petImageUrl={form.petImageUrl}
       />
     )
   })
@@ -40,7 +74,14 @@ const Admin = props => {
       <div className="content">
         <div className="max-width-800">
           <h1>Welcome, Admin!</h1>
+          <h2>Adoption Form Awaits:</h2>
           {allAdoptForms}
+        </div>
+
+        <div className="max-width-800">
+          <h1>=====================</h1>
+          <h2>Surrender Form Awaits:</h2>
+          {allSurrenderForms}
         </div>
       </div>
     </div>

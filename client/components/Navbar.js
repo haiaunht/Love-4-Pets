@@ -40,7 +40,7 @@ const Navbar = props => {
           </Link>
         </li>
         <li>
-          <Link to="/adoptions/new" onClick={() => setIsActive(current => !current)}>
+          <Link to="/surrenders/new" onClick={() => setIsActive(current => !current)}>
             Surrender Form
           </Link>
         </li>
