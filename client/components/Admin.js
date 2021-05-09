@@ -43,15 +43,18 @@ const Admin = props => {
 
   const allAdoptForms = adoptForms.map( form => {
     return (
-      <AdminForm
-        key={form.id}
-        ownerName={form.name}
-        phoneNumber={form.phoneNumber}
-        email={form.email}
-        homeStatus={form.homeStatus}
-        applicationStatus={form.applicationStatus}
-        petId={form.petId}
-      />
+        <div>
+          <AdminForm
+              key={form.id}
+              ownerName={form.name}
+              phoneNumber={form.phoneNumber}
+              email={form.email}
+              homeStatus={form.homeStatus}
+              applicationStatus={form.applicationStatus}
+              petId={form.petId}
+          />
+        </div>
+
     )
   })
 
@@ -76,7 +79,9 @@ const Admin = props => {
         <div className="max-width-800">
           <h1>Welcome, Admin!</h1>
           <h2>Adoption Form Awaits:</h2>
+          <ul>
           {allAdoptForms}
+          </ul>
         </div>
 
         <div className="max-width-800">

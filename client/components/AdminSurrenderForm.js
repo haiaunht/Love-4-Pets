@@ -45,10 +45,6 @@ const AdminSurrenderForm = props => {
     console.log(awaitApplication)
   }
 
-  if (submitSuccessful) {
-    //return <Redirect to="/pets/puppies" />
-  }
-
   const handleDeny = (event) => {
     event.preventDefault()
     setSubmitSuccessful(false)
@@ -73,11 +69,11 @@ const AdminSurrenderForm = props => {
               <input name="age" value={props.surrender.petAge} hidden/>
               <label><strong>Application status: APPROVED</strong></label><br/>
               <a href="/pets/puppies" >Go to Home</a>
-              <input type="submit" value="Approve" />
+            {/*  <input type="submit" value="Approve" />*/}
 
-            </form>
-            <form onSubmit={handleDeny}>
-              <input type="submit" value="Deny"/>
+            {/*</form>*/}
+            {/*<form onSubmit={handleDeny}>*/}
+            {/*  <input type="submit" value="Deny"/>*/}
             </form>
           </div>
         </div>
@@ -100,11 +96,11 @@ const AdminSurrenderForm = props => {
               <input name="age" value={props.surrender.petAge} hidden/>
               <label><strong>Application status: DENY</strong></label><br/>
 
-              <input type="submit" value="Approve" />
+            {/*  <input type="submit" value="Approve" />*/}
 
-            </form>
-            <form onSubmit={handleDeny}>
-              <input type="submit" value="Deny"/>
+            {/*</form>*/}
+            {/*<form onSubmit={handleDeny}>*/}
+            {/*  <input type="submit" value="Deny"/>*/}
             </form>
           </div>
         </div>

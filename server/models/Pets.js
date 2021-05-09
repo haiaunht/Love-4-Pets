@@ -29,6 +29,21 @@ class Pets {
       pool.end()
     }
   }
+
+  static async findById(id) {
+    try {
+      const client = await pool.connect()
+      const result = await client.query("SELECT * FROM adoptable_pets WHERE id= $1", [id])
+
+      const petForAdoption = new this(result.rows[0])
+      client.release()
+
+      return petForAdoption
+    } catch (error) {
+      console.error(`Error: ${error}`)
+      pool.end()
+    }
+  }
 }
 
 export default Pets

@@ -1,67 +1,91 @@
 import React, {useState, useEffect} from "react"
 
 const AdminForm = props => {
-  console.log(props.petId)
-  const awaitApplication = {
-    name : props.petName,
-    imgUrl : props.imgUrl,
-    age : props.petAge,
-    vaccinationStatus: props.vaccinationStatus,
-    adoptionStory : "Just join from the Surrender shelter",
-    adoptionStatus : true,
-    typeId: props.petTypeId
-  }
+  //find pet by the id
+  const [submitSuccessful, setSubmitSuccessful] = useState(null)
+  const [petToRemove, setPetToRemove] = useState({})
 
-  const addToPetsAfterApproval = async () => {
-    console.log(awaitApplication)
+  const getPetWithId = async () => {
+    const petIdForAdoption = props.petId
     try {
-      const response = await fetch("/api/v1/admin/get-all-pets", {
-        method: "POST",
-        headers: new Headers({
-          "Content-Type": "application/json"
-        }),
-        body: JSON.stringify(awaitApplication)
-      })
+      const response = await fetch(`/api/v1/pets/${petIdForAdoption}`)
       if (!response.ok) {
         const errorMessage = `${response.status} (${response.statusText})`
         const error = new Error(errorMessage)
         throw error
       }
-      const body = await response.json()
-      console.log(awaitApplication)
-    } catch (error) {
-      console.error(`Error in Fetch: ${error.message}`)
+      const responseBody = await response.json()
+      setPetToRemove(responseBody.petForAdoption)
+    } catch (err) {
+      console.error(`Error in Fetch: ${err.message}`)
     }
-    console.log("Approved")
   }
 
-    const handleApprove = (event) => {
-      event.preventDefault()
-      // addToPetsAfterApproval()
-      console.log("Approval for Adoption application!")
-    }
+  useEffect(() => {
+    getPetWithId()
+  }, [])
 
-    const handleDeny = (event) => {
-      event.preventDefault()
-      console.log("Deny the Adoption Application")
-    }
+  console.log(petToRemove)
+  //delete the obj
 
+  const handleApprove = (event) => {
+    event.preventDefault()
+    setSubmitSuccessful(true)
+  }
+
+  const handleDeny = (event) => {
+    event.preventDefault()
+    setSubmitSuccessful(false)
+    console.log("Deny")
+  }
+
+  if (submitSuccessful) {
     return (
-        <div className="adiminform">
+        <div >
           <div>
-            <form>
+            <form onSubmit={handleApprove}>
               <label><strong>Name: </strong>{props.ownerName}</label><br/>
               <label><strong>Contact: </strong>{props.phoneNumber}</label><br/>
               <label><strong>Email: </strong>{props.email}</label><br/>
-              <label><strong>Application
-                status: </strong>{props.applicationStatus}</label><br/>
-
-              <button onClick={handleApprove}>Approve</button>
-              <button onClick={handleDeny}>Deny</button>
+              <label><strong>Application status: </strong>APPROVED</label><br/>
             </form>
           </div>
         </div>
     )
+  } else if (submitSuccessful == false) {
+    return (
+        <div >
+          <div>
+            <form onSubmit={handleApprove}>
+              <label><strong>Name: </strong>{props.ownerName}</label><br/>
+              <label><strong>Contact: </strong>{props.phoneNumber}</label><br/>
+              <label><strong>Email: </strong>{props.email}</label><br/>
+              <label><strong>Application
+                status: </strong>DENY</label><br/>
+            </form>
+          </div>
+        </div>
+    )
+  } else {
+    return (
+        <div >
+          <div>
+            <form onSubmit={handleApprove}>
+              <label><strong>Name: </strong>{props.ownerName}</label><br/>
+              <label><strong>Contact: </strong>{props.phoneNumber}</label><br/>
+              <label><strong>Email: </strong>{props.email}</label><br/>
+              <label><strong>Application status: </strong>{props.applicationStatus}</label><br/>
+
+              <input type="submit" value="Approve" />
+
+            </form>
+            <form onSubmit={handleDeny}>
+              <input type="submit" value="Deny"/>
+            </form>
+          </div>
+        </div>
+    )
+  }
 
 }
 
