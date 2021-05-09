@@ -14,14 +14,14 @@ petsRouter.get("/", async (req, res) => {
   }
 })
 
-petsRouter.get("/:id", async (req, res) => {
-  try {
-    const petForAdoption = await Pets.findById(req.params.id)
-    res.status(200).json({ petForAdoption })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ errors: error })
-  }
-})
+// petsRouter.get("/:id", async (req, res) => {
+//   try {
+//     const petForAdoption = await Pets.findById(req.params.id)
+//     res.status(200).json({ petForAdoption })
+//   } catch (error) {
+//     console.log(error)
+//     res.status(500).json({ errors: error })
+//   }
+// })
 
 export default petsRouter

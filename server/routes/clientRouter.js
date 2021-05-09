@@ -5,7 +5,6 @@ const clientRouter = new express.Router()
 const clientRoutes = [
   "/",
   "/pets",
-    "/pets/:id",
   "/pets/puppies",
   "/pets/puppies/:id",
   "/pets/pokemon",

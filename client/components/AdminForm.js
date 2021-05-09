@@ -5,28 +5,25 @@ const AdminForm = props => {
   const [submitSuccessful, setSubmitSuccessful] = useState(null)
   const [petToRemove, setPetToRemove] = useState({})
 
-  const getPetWithId = async () => {
-    const petIdForAdoption = props.petId
-    try {
-      const response = await fetch(`/api/v1/pets/${petIdForAdoption}`)
-      if (!response.ok) {
-        const errorMessage = `${response.status} (${response.statusText})`
-        const error = new Error(errorMessage)
-        throw error
-      }
-      const responseBody = await response.json()
-      setPetToRemove(responseBody.petForAdoption)
-    } catch (err) {
-      console.error(`Error in Fetch: ${err.message}`)
-    }
-  }
-
-  useEffect(() => {
-    getPetWithId()
-  }, [])
-
-  console.log(petToRemove)
-  //delete the obj
+  // const getPetWithId = async () => {
+  //   const petIdForAdoption = props.petId
+  //   try {
+  //     const response = await fetch(`/api/v1/pets/${petIdForAdoption}`)
+  //     if (!response.ok) {
+  //       const errorMessage = `${response.status} (${response.statusText})`
+  //       const error = new Error(errorMessage)
+  //       throw error
+  //     }
+  //     const responseBody = await response.json()
+  //     setPetToRemove(responseBody.petForAdoption)
+  //   } catch (err) {
+  //     console.error(`Error in Fetch: ${err.message}`)
+  //   }
+  // }
+  //
+  // useEffect(() => {
+  //   getPetWithId()
+  // }, [])
 
   const handleApprove = (event) => {
     event.preventDefault()
@@ -41,16 +38,16 @@ const AdminForm = props => {
 
   if (submitSuccessful) {
     return (
-        <div >
-          <div>
-            <form onSubmit={handleApprove}>
-              <label><strong>Name: </strong>{props.ownerName}</label><br/>
-              <label><strong>Contact: </strong>{props.phoneNumber}</label><br/>
-              <label><strong>Email: </strong>{props.email}</label><br/>
-              <label><strong>Application status: </strong>APPROVED</label><br/>
-            </form>
-          </div>
+      <div >
+        <div>
+          <form onSubmit={handleApprove}>
+            <label><strong>Name: </strong>{props.ownerName}</label><br/>
+            <label><strong>Contact: </strong>{props.phoneNumber}</label><br/>
+            <label><strong>Email: </strong>{props.email}</label><br/>
+            <label><strong>Application status: </strong>APPROVED</label><br/><br/><hr/>
+          </form>
         </div>
+      </div>
     )
   } else if (submitSuccessful == false) {
     return (

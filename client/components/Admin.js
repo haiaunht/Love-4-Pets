@@ -79,9 +79,7 @@ const Admin = props => {
         <div className="max-width-800">
           <h1>Welcome, Admin!</h1>
           <h2>Adoption Form Awaits:</h2>
-          <ul>
           {allAdoptForms}
-          </ul>
         </div>
 
         <div className="max-width-800">
