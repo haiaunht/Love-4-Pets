@@ -28,7 +28,7 @@ const App = props => {
           <Route exact path="/surrenders/new" component={SurrenderForm} />
           <Route exact path="/about" component={About} />
           <Route exact path="/admin" component={Admin} />
-          <Route exact path="/admin/surrenderedPets" component={Admin} />
+          <Route exact path="/surrenders" component={Admin} />
           <Route path="/" component={PageNotFound} />
         </Switch>
       </BrowserRouter>

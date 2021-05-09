@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react"
 
 const AdminForm = props => {
-
   console.log(props.petId)
   const awaitApplication = {
     name : props.petName,
@@ -13,28 +12,28 @@ const AdminForm = props => {
     typeId: props.petTypeId
   }
 
-  // const addToPetsAfterApproval = async () => {
-  //   console.log(awaitApplication)
-  //   try {
-  //     const response = await fetch("/api/v1/admin/get-all-pets", {
-  //       method: "POST",
-  //       headers: new Headers({
-  //         "Content-Type": "application/json"
-  //       }),
-  //       body: JSON.stringify(awaitApplication)
-  //     })
-  //     if (!response.ok) {
-  //       const errorMessage = `${response.status} (${response.statusText})`
-  //       const error = new Error(errorMessage)
-  //       throw error
-  //     }
-  //     const body = await response.json()
-  //     console.log(awaitApplication)
-  //   } catch (error) {
-  //     console.error(`Error in Fetch: ${error.message}`)
-  //   }
-  //   console.log("Approved")
-  // }
+  const addToPetsAfterApproval = async () => {
+    console.log(awaitApplication)
+    try {
+      const response = await fetch("/api/v1/admin/get-all-pets", {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(awaitApplication)
+      })
+      if (!response.ok) {
+        const errorMessage = `${response.status} (${response.statusText})`
+        const error = new Error(errorMessage)
+        throw error
+      }
+      const body = await response.json()
+      console.log(awaitApplication)
+    } catch (error) {
+      console.error(`Error in Fetch: ${error.message}`)
+    }
+    console.log("Approved")
+  }
 
     const handleApprove = (event) => {
       event.preventDefault()

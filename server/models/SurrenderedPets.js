@@ -32,7 +32,7 @@ const pool = new pg.Pool({
         return pets
       } catch(error) {
         console.error(error)
-        pool.end()
+        //pool.end()
       }
   
     }
@@ -53,7 +53,7 @@ const pool = new pg.Pool({
         return newPet
       } catch (error) {
         console.error(error)
-        pool.end()
+        //pool.end()
       }
     }
   }

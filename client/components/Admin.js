@@ -64,7 +64,8 @@ const Admin = props => {
         email={form.email}
         homeStatus={form.homeStatus}
         applicationStatus={form.applicationStatus}
-        petImageUrl={form.petImageUrl}
+        surrender={form}
+        typeId={form.petTypeId}
       />
     )
   })
